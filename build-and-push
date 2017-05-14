@@ -1,9 +1,13 @@
 #!/bin/sh
 
-DOCKER_HUB_IMAGE="xfrocks/mydumper"
 LATEST_VERSION="0.9.1"
+DOCKER_HUB_IMAGE="xfrocks/mydumper"
 DOCKER_HUB_TAG="$DOCKER_HUB_IMAGE:$LATEST_VERSION"
 
-docker build -t "$DOCKER_HUB_IMAGE" -t "$DOCKER_HUB_TAG" . \
-    && docker push "$DOCKER_HUB_IMAGE" \
-    && docker push "$DOCKER_HUB_TAG"
+docker build . \
+  --build-arg MYDUMPER_VERSION="v$LATEST_VERSION" \
+  -t "$DOCKER_HUB_IMAGE" \
+  -t "$DOCKER_HUB_TAG"
+
+docker push "$DOCKER_HUB_IMAGE"
+docker push "$DOCKER_HUB_TAG"
