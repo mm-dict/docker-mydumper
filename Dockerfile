@@ -23,5 +23,8 @@ RUN  export LIB_PACKAGES='glib mariadb-client-libs pcre' \
   && (rm -rf /tmp/* 2>/dev/null || true) \
   && (rm -rf /var/cache/apk/* 2>/dev/null || true)
 
-ENTRYPOINT ["mydumper"]
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["-V"]
