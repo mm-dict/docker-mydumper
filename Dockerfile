@@ -21,5 +21,4 @@ RUN  export LIB_PACKAGES='glib mariadb-connector-c-dev mariadb-connector-c pcre'
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["-V"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
