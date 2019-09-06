@@ -1,14 +1,13 @@
-FROM alpine:3.7
-MAINTAINER Dao Hoang Son <daohoangson@gmail.com>
+FROM alpine:3.9
 
-ARG MYDUMPER_VERSION
+ENV MYDUMPER_VERSION="0.9.5"
 
-RUN  export LIB_PACKAGES='glib mariadb-client-libs pcre' \
+RUN  export LIB_PACKAGES='glib mariadb-connector-c-dev mariadb-connector-c pcre' \
   && export BUILD_PACKAGES='glib-dev mariadb-dev zlib-dev pcre-dev libressl-dev cmake build-base' \
   \
   && apk add --no-cache --update $LIB_PACKAGES $BUILD_PACKAGES \
   && cd /tmp \
-  && wget "https://github.com/maxbube/mydumper/archive/v${MYDUMPER_VERSION}.tar.gz" -O mydumper.tar.gz \
+  && wget https://github.com/maxbube/mydumper/archive/v${MYDUMPER_VERSION}.tar.gz -O mydumper.tar.gz \
   && tar -xzf mydumper.tar.gz \
   && cd mydumper* \
   \
